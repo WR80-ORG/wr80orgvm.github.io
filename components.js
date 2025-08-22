@@ -57,6 +57,34 @@ class W80Opcode extends HTMLElement {
         var scri = "";
         this.opcode_container.style.color = "purple";
         switch(newValue){
+            case "01":
+                scri = "AND";
+                this.arg_container.innerHTML = "R1";
+                break;
+            case "02":
+                scri = "AND";
+                this.arg_container.innerHTML = "R2";
+                break;
+            case "03":
+                scri = "AND";
+                this.arg_container.innerHTML = "R3";
+                break;
+            case "04":
+                scri = "AND";
+                this.arg_container.innerHTML = "R4";
+                break;
+            case "05":
+                scri = "AND";
+                this.arg_container.innerHTML = "R5";
+                break;
+            case "06":
+                scri = "AND";
+                this.arg_container.innerHTML = "R6";
+                break;
+            case "07":
+                scri = "AND";
+                this.arg_container.innerHTML = "R7";
+                break;
             case "0E":
                 scri = "CDR";
                 break;
