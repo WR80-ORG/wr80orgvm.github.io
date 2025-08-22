@@ -3,9 +3,27 @@
         <title>Virtual Machine</title>
         <script src="/components.js"></script>
         <script src="/vm.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     </head>
     <body>
+        <table>
+            <tr>
+                <td>
+                    <fieldset>
+                        <legend>Cardridge</legend>
+                        <w80-button label="File" icon="bi-file-code" onclick="window.WR80X.openFile(casette)"></w80-button>
+                        <w80-button label="URL" icon="bi-globe" onclick="window.WR80X.openURL(casette,window.prompt('URL'))"></w80-button>
+                    </fieldset>
+                </td>
+                <td>
+                    <fieldset>
+                        <legend>Debugger</legend>
+                        <w80-button label="Step" icon="bi-skip-forward" onclick="casette.nextInstruction(true)"></w80-button>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
         <w80-casette id="casette"></w80-casette>
-        <button onclick="window.WR80X.openFile(casette)">Load file</button>
+        
     </body>
 </html>

@@ -6,7 +6,7 @@ class W80Opcode extends HTMLElement {
     // Always call super first in constructor
     super();
     const shadow = this.attachShadow({ mode: "open" });
-    console.log("Custom element created",this);
+    // console.log("Custom element created",this);
     this.address_container = document.createElement("b");
     this.address_container.style.color = "gray";
     this.address_container.style.fontWeight = "bold";
@@ -30,23 +30,23 @@ class W80Opcode extends HTMLElement {
   }
 
   connectedCallback() {
-    console.log("Custom element added to page.");
+    // console.log("Custom element added to page.");
   }
 
   disconnectedCallback() {
-    console.log("Custom element removed from page.");
+    // console.log("Custom element removed from page.");
   }
 
   connectedMoveCallback() {
-    console.log("Custom element moved with moveBefore()");
+    // console.log("Custom element moved with moveBefore()");
   }
 
   adoptedCallback() {
-    console.log("Custom element moved to new page.");
+    // console.log("Custom element moved to new page.");
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    console.log(`Attribute ${name} has changed.`);
+    // console.log(`Attribute ${name} has changed.`);
     if(name==="address"){
         while(newValue.length<5)
         {
@@ -107,7 +107,6 @@ class W80Casette extends HTMLElement {
 
     constructor(){
         super();
-        this.pc = -1;
         
     }
 
@@ -123,6 +122,8 @@ class W80Casette extends HTMLElement {
             th.appendChild(nodes[r]);
             this.shadow.appendChild(th);
         }
+        this.setAttribute("nodecount", nodes.length);
+        this.setAttribute("pc", -1);
     }
 
     grabInstruction(where){
@@ -131,13 +132,16 @@ class W80Casette extends HTMLElement {
             throw new Error("Cant grab instruction " + where);
         }
         pickednode = pickednode[0];
-        console.log(pickednode);
         return pickednode;
     }
 
     nextInstruction(mark){
-        this.pc += 1;
-        var deze = this.grabInstruction(this.pc);
+        if(this.shadow===undefined){
+            window.alert("No program loaded. Please load a program first from the cardridge menu.");
+            return;
+        }
+        this.setAttribute("pc", Number(this.getAttribute("pc"))+1);
+        var deze = this.grabInstruction(this.getAttribute("pc"));
         if(mark){
             var pickednode = this.shadow.querySelectorAll("w80-opcode.marked");
             for(var i = 0 ; i < pickednode.length ; i++){
@@ -149,5 +153,42 @@ class W80Casette extends HTMLElement {
     }
 }
 
+class W80Button extends HTMLElement {
+  static observedAttributes = ["label", "icon", "onclick"];
+
+    constructor() {
+        super();
+
+        const shadow = this.attachShadow({ mode: "open" });
+        // console.log("Custom element created",this);
+        const styleurl = document.createElement("link");
+        styleurl.setAttribute("rel","stylesheet");
+        styleurl.setAttribute("href","https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+        shadow.appendChild(styleurl);
+        const style = document.createElement("style");
+        style.innerHTML = ".buttonicon { font-size: 50px; } \nbutton{width: 100px;height: 100px;font-size: 20px;border: solid lightblue 1px;background: linear-gradient(aliceblue,lightblue,aliceblue);}\\nbutton:hover{background: linear-gradient(lightblue,aliceblue,lightblue);border: solid blue 1px;cursor: pointer;}";
+        shadow.appendChild(style);
+        this.base_button = document.createElement("button");
+        this.icontag = document.createElement("i");
+        this.icontag.classList.add("buttonicon");
+        this.icontag.classList.add("bi");
+        this.base_button.appendChild(this.icontag);
+        this.base_button.appendChild(document.createElement("br"));
+        this.labeltag = document.createElement("span");
+        this.base_button.appendChild(this.labeltag);
+        shadow.appendChild(this.base_button);
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        // console.log(`Attribute ${name} has changed.`);
+        if(name==="label"){
+            this.labeltag.innerHTML = newValue;
+        }else if(name==="icon"){
+            this.icontag.className = "buttonicon bi " + newValue;
+        }
+    }
+}
+
 customElements.define("w80-opcode", W80Opcode);
 customElements.define("w80-casette", W80Casette);
+customElements.define("w80-button", W80Button);
