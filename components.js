@@ -88,6 +88,34 @@ class W80Opcode extends HTMLElement {
             case "0E":
                 scri = "CDR";
                 break;
+            case "11":
+                scri = "OR";
+                this.arg_container.innerHTML = "R1";
+                break;
+            case "12":
+                scri = "OR";
+                this.arg_container.innerHTML = "R2";
+                break;
+            case "13":
+                scri = "OR";
+                this.arg_container.innerHTML = "R3";
+                break;
+            case "14":
+                scri = "OR";
+                this.arg_container.innerHTML = "R4";
+                break;
+            case "15":
+                scri = "OR";
+                this.arg_container.innerHTML = "R5";
+                break;
+            case "16":
+                scri = "OR";
+                this.arg_container.innerHTML = "R6";
+                break;
+            case "17":
+                scri = "OR";
+                this.arg_container.innerHTML = "R7";
+                break;
             case "18":
                 scri = "PUSHB";
                 break;
