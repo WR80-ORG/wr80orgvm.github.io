@@ -128,6 +128,34 @@ class W80Opcode extends HTMLElement {
             case "1D":
                 scri = "ABP";
                 break;
+            case "21":
+                scri = "NOT";
+                this.arg_container.innerHTML = "R1";
+                break;
+            case "22":
+                scri = "NOT";
+                this.arg_container.innerHTML = "R2";
+                break;
+            case "23":
+                scri = "NOT";
+                this.arg_container.innerHTML = "R3";
+                break;
+            case "24":
+                scri = "NOT";
+                this.arg_container.innerHTML = "R4";
+                break;
+            case "25":
+                scri = "NOT";
+                this.arg_container.innerHTML = "R5";
+                break;
+            case "26":
+                scri = "NOT";
+                this.arg_container.innerHTML = "R6";
+                break;
+            case "27":
+                scri = "NOT";
+                this.arg_container.innerHTML = "R7";
+                break;
             case "28":
                 scri = "PUSHD";
                 break;
