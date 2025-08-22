@@ -12,20 +12,7 @@ window.WR80X = {
                 var reader = new FileReader();
                 reader.readAsArrayBuffer(file);
                 reader.onload = function (evt) {
-                    const view = new Uint8Array(evt.target.result);
-                    var address = 0;
-                    var lst = [];
-                    for(var g = 0 ; g < view.length ; g++){
-                        var nummer = view[g].toString(16).toUpperCase();
-                        var typoid = document.createElement("w80-opcode");
-                        typoid.setAttribute("opcode",nummer);
-                        typoid.setAttribute("address",address);
-                        typoid.style.width="100vh";
-                        typoid.style.display="block";
-                        lst.push(typoid);
-                        address++;
-                    }
-                    store.updatescheck(lst);
+                    window.WR80X.parseOpenFileResult(evt.target.result,store);
                     resolve();
                 }
                 reader.onerror = function (evt) {
@@ -46,20 +33,7 @@ window.WR80X = {
                 }
                 return response.arrayBuffer();
             }).then(buffer => {
-                const view = new Uint8Array(buffer);
-                var address = 0;
-                var lst = [];
-                for(var g = 0 ; g < view.length ; g++){
-                    var nummer = view[g].toString(16).toUpperCase();
-                    var typoid = document.createElement("w80-opcode");
-                    typoid.setAttribute("opcode",nummer);
-                    typoid.setAttribute("address",address);
-                    typoid.style.width="100vh";
-                    typoid.style.display="block";
-                    lst.push(typoid);
-                    address++;
-                }
-                store.updatescheck(lst);
+                window.WR80X.parseOpenFileResult(buffer,store);
                 resolve();
             }).catch(err => {
                 return reject("Unable to fetch file");
@@ -95,6 +69,22 @@ window.WR80X = {
                 return reject("Error fetching GitHub contents: " + err.message);
             });
         });
+    },
+    parseOpenFileResult: function(buffer,store){
+        const view = new Uint8Array(buffer);
+        var address = 0;
+        var lst = [];
+        for(var g = 0 ; g < view.length ; g++){
+            var nummer = view[g].toString(16).toUpperCase();
+            var typoid = document.createElement("w80-opcode");
+            typoid.setAttribute("opcode",nummer);
+            typoid.setAttribute("address",address);
+            typoid.style.width="100%";
+            typoid.style.display="block";
+            lst.push(typoid);
+            address++;
+        }
+        store.updatescheck(lst);
     }
     
 };

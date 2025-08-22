@@ -48,10 +48,7 @@ class W80Opcode extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     // console.log(`Attribute ${name} has changed.`);
     if(name==="address"){
-        while(newValue.length<5)
-        {
-            newValue = "0" + newValue;
-        }
+        newValue = newValue.padStart(5,"0");
         this.address_container.innerHTML = newValue;
     }else if(name=="opcode"){
         if(newValue.length==1){
@@ -114,16 +111,62 @@ class W80Casette extends HTMLElement {
         this.shadow = this.attachShadow({ mode: "open" });
         this.shadow.innerHTML = "";
         var sty = document.createElement("style");
-        sty.innerHTML = ".marked { background-color: pink}";
+        sty.innerHTML = ".marked { background-color: pink;} section { width: 100%; } w80-opcode { width: 100%} table{ width: 100%} fieldset{ overflow-y: scroll; height: 300px;}";
         this.shadow.appendChild(sty);
+
+
+        var basetable = document.createElement("table");
+        this.shadow.appendChild(basetable);
+        var baserow = document.createElement("tr");
+        var cellleft = document.createElement("td");
+        cellleft.style.width="70%";
+        baserow.appendChild(cellleft);
+        var cellright = document.createElement("td");
+        baserow.appendChild(cellright);
+        basetable.appendChild(baserow);
+
+
+        var lod = document.createElement("fieldset");
+        var leg = document.createElement("legend");
+        leg.innerHTML = "Program";
+        lod.appendChild(leg);
+        cellleft.appendChild(lod);
 
         for(var r = 0 ; r < nodes.length ; r++){
             var th = document.createElement("section");
             th.appendChild(nodes[r]);
-            this.shadow.appendChild(th);
+            lod.appendChild(th);
         }
         this.setAttribute("nodecount", nodes.length);
         this.setAttribute("pc", -1);
+
+        var lod = document.createElement("fieldset");
+        var leg = document.createElement("legend");
+        leg.innerHTML = "CPU state";
+        lod.appendChild(leg);
+
+
+        var rega = document.createElement("table");
+        lod.appendChild(rega);
+        var row = document.createElement("tr");
+        var cell = document.createElement("td");
+        cell.innerHTML = "Name";
+        row.appendChild(cell);
+        cell = document.createElement("td");
+        cell.innerHTML = "Value";
+        row.appendChild(cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Instruction Pointer";
+        row.appendChild(cell);
+        this.ip_cell = document.createElement("td");
+        this.ip_cell.innerHTML = "-1";
+        row.appendChild(this.ip_cell);
+        rega.appendChild(row);
+
+        cellright.appendChild(lod);
     }
 
     grabInstruction(where){
@@ -141,6 +184,7 @@ class W80Casette extends HTMLElement {
             return;
         }
         this.setAttribute("pc", Number(this.getAttribute("pc"))+1);
+        this.ip_cell.innerHTML = this.getAttribute("pc").padStart(5,"0");
         var deze = this.grabInstruction(this.getAttribute("pc"));
         if(mark){
             var pickednode = this.shadow.querySelectorAll("w80-opcode.marked");
@@ -150,6 +194,10 @@ class W80Casette extends HTMLElement {
             deze.classList.add("marked");
         }
         return deze;
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        console.log(`Attribute ${name} has changed.`);
     }
 }
 
