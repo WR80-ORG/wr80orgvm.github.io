@@ -257,6 +257,62 @@ class W80Opcode extends HTMLElement {
                 scri = "SUB";
                 this.arg_container.innerHTML = "R7";
                 break;
+            case "89":
+                scri = "MUL";
+                this.arg_container.innerHTML = "R1";
+                break;
+            case "8A":
+                scri = "MUL";
+                this.arg_container.innerHTML = "R2";
+                break;
+            case "8B":
+                scri = "MUL";
+                this.arg_container.innerHTML = "R3";
+                break;
+            case "8C":
+                scri = "MUL";
+                this.arg_container.innerHTML = "R4";
+                break;
+            case "8D":
+                scri = "MUL";
+                this.arg_container.innerHTML = "R5";
+                break;
+            case "8E":
+                scri = "MUL";
+                this.arg_container.innerHTML = "R6";
+                break;
+            case "8F":
+                scri = "MUL";
+                this.arg_container.innerHTML = "R7";
+                break;
+            case "99":
+                scri = "DIV";
+                this.arg_container.innerHTML = "R1";
+                break;
+            case "9A":
+                scri = "DIV";
+                this.arg_container.innerHTML = "R2";
+                break;
+            case "9B":
+                scri = "DIV";
+                this.arg_container.innerHTML = "R3";
+                break;
+            case "9C":
+                scri = "DIV";
+                this.arg_container.innerHTML = "R4";
+                break;
+            case "9D":
+                scri = "DIV";
+                this.arg_container.innerHTML = "R5";
+                break;
+            case "9E":
+                scri = "DIV";
+                this.arg_container.innerHTML = "R6";
+                break;
+            case "9F":
+                scri = "DIV";
+                this.arg_container.innerHTML = "R7";
+                break;
             default:
                 if(newValue.startsWith("6")){
                     scri = "ST";
