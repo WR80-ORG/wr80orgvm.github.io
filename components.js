@@ -159,16 +159,103 @@ class W80Opcode extends HTMLElement {
             case "28":
                 scri = "PUSHD";
                 break;
-            case "2F":
+            case "2A":
                 scri = "SBW";
+                break;
+            case "2F":
+                scri = "RET";
+                break;
+            case "31":
+                scri = "XOR";
+                this.arg_container.innerHTML = "R1";
+                break;
+            case "32":
+                scri = "XOR";
+                this.arg_container.innerHTML = "R2";
+                break;
+            case "33":
+                scri = "XOR";
+                this.arg_container.innerHTML = "R3";
+                break;
+            case "34":
+                scri = "XOR";
+                this.arg_container.innerHTML = "R4";
+                break;
+            case "35":
+                scri = "XOR";
+                this.arg_container.innerHTML = "R5";
+                break;
+            case "36":
+                scri = "XOR";
+                this.arg_container.innerHTML = "R6";
+                break;
+            case "37":
+                scri = "XOR";
+                this.arg_container.innerHTML = "R7";
                 break;
             case "40":
                 scri = "ADD";
                 this.arg_container.innerHTML = "R0";
                 break;
+            case "41":
+                scri = "ADD";
+                this.arg_container.innerHTML = "R1";
+                break;
+            case "42":
+                scri = "ADD";
+                this.arg_container.innerHTML = "R2";
+                break;
+            case "43":
+                scri = "ADD";
+                this.arg_container.innerHTML = "R3";
+                break;
+            case "44":
+                scri = "ADD";
+                this.arg_container.innerHTML = "R4";
+                break;
+            case "45":
+                scri = "ADD";
+                this.arg_container.innerHTML = "R5";
+                break;
+            case "46":
+                scri = "ADD";
+                this.arg_container.innerHTML = "R6";
+                break;
+            case "47":
+                scri = "ADD";
+                this.arg_container.innerHTML = "R7";
+                break;
             case "48":
                 scri = "POP";
                 this.arg_container.innerHTML = "R0";
+                break;
+            case "51":
+                scri = "SUB";
+                this.arg_container.innerHTML = "R1";
+                break;
+            case "52":
+                scri = "SUB";
+                this.arg_container.innerHTML = "R2";
+                break;
+            case "53":
+                scri = "SUB";
+                this.arg_container.innerHTML = "R3";
+                break;
+            case "54":
+                scri = "SUB";
+                this.arg_container.innerHTML = "R4";
+                break;
+            case "55":
+                scri = "SUB";
+                this.arg_container.innerHTML = "R5";
+                break;
+            case "56":
+                scri = "SUB";
+                this.arg_container.innerHTML = "R6";
+                break;
+            case "57":
+                scri = "SUB";
+                this.arg_container.innerHTML = "R7";
                 break;
             default:
                 if(newValue.startsWith("6")){
