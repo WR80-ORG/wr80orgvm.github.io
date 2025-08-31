@@ -48,7 +48,7 @@ class W80Opcode extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     // console.log(`Attribute ${name} has changed.`);
     if(name==="address"){
-        newValue = newValue.padStart(5,"0");
+        newValue = newValue.padStart(3,"0");
         this.address_container.innerHTML = newValue;
     }else if(name=="opcode"){
         if(newValue.length==1){
@@ -386,11 +386,297 @@ class W80Casette extends HTMLElement {
 
         row = document.createElement("tr");
         cell = document.createElement("td");
-        cell.innerHTML = "Instruction Pointer";
+        cell.innerHTML = "Private Registers";
+        cell.style.fontWeight="bold";
+        row.appendChild(cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Instruction Register";
+        row.appendChild(cell);
+        this.ir_cell = document.createElement("td");
+        this.ir_cell.innerHTML = "0";
+        row.appendChild(this.ir_cell);
+        rega.appendChild(row);
+
+        var opcode = parseInt(this.ir_cell.innerHTML,16);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "- IR opcode";
+        row.appendChild(cell);
+        this.ir_op_cell = document.createElement("td");
+        this.ir_op_cell.innerHTML = (opcode & 0xF).toString(16).toUpperCase();
+        row.appendChild(this.ir_op_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "- IR extension";
+        row.appendChild(cell);
+        this.ir_ex_cell = document.createElement("td");
+        this.ir_ex_cell.innerHTML = ((opcode & 0x10)>>4).toString(16).toUpperCase();
+        row.appendChild(this.ir_ex_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "- IR registers";
+        row.appendChild(cell);
+        this.ir_rg_cell = document.createElement("td");
+        this.ir_rg_cell.innerHTML = ((opcode & 0xE0)>>5).toString(16).toUpperCase();
+        row.appendChild(this.ir_rg_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Result Register";
+        row.appendChild(cell);
+        this.rr_cell = document.createElement("td");
+        this.rr_cell.innerHTML = "-1";
+        row.appendChild(this.rr_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Program Counter";
         row.appendChild(cell);
         this.ip_cell = document.createElement("td");
         this.ip_cell.innerHTML = "-1";
         row.appendChild(this.ip_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Jump Register";
+        row.appendChild(cell);
+        this.jr_cell = document.createElement("td");
+        this.jr_cell.innerHTML = "0";
+        row.appendChild(this.jr_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Stack Transfer High Register";
+        row.appendChild(cell);
+        this.sthr_cell = document.createElement("td");
+        this.sthr_cell.innerHTML = "0";
+        row.appendChild(this.sthr_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Stack Transfer Low Register";
+        row.appendChild(cell);
+        this.stlr_cell = document.createElement("td");
+        this.stlr_cell.innerHTML = "0";
+        row.appendChild(this.stlr_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Interrupt Special Register";
+        row.appendChild(cell);
+        this.isr_cell = document.createElement("td");
+        this.isr_cell.innerHTML = "0";
+        row.appendChild(this.isr_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "P2 Interrupt Data Register";
+        row.appendChild(cell);
+        this.p2l_cell = document.createElement("td");
+        this.p2l_cell.innerHTML = "0";
+        row.appendChild(this.p2l_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Public Registers";
+        cell.style.fontWeight="bold";
+        row.appendChild(cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Stack Pointer";
+        row.appendChild(cell);
+        this.sp_cell = document.createElement("td");
+        this.sp_cell.innerHTML = "0";
+        row.appendChild(this.sp_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Base Pointer";
+        row.appendChild(cell);
+        this.bp_cell = document.createElement("td");
+        this.bp_cell.innerHTML = "0";
+        row.appendChild(this.bp_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Data Register";
+        row.appendChild(cell);
+        this.dr_cell = document.createElement("td");
+        this.dr_cell.innerHTML = "0";
+        row.appendChild(this.dr_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Status Register";
+        row.appendChild(cell);
+        this.sr_cell = document.createElement("td");
+        this.sr_cell.innerHTML = "0";
+        row.appendChild(this.sr_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "User Register 0";
+        row.appendChild(cell);
+        this.r0_cell = document.createElement("td");
+        this.r0_cell.innerHTML = "0";
+        row.appendChild(this.r0_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "User Register 1";
+        row.appendChild(cell);
+        this.r1_cell = document.createElement("td");
+        this.r1_cell.innerHTML = "0";
+        row.appendChild(this.r1_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "User Register 2";
+        row.appendChild(cell);
+        this.r2_cell = document.createElement("td");
+        this.r2_cell.innerHTML = "0";
+        row.appendChild(this.r2_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "User Register 3";
+        row.appendChild(cell);
+        this.r3_cell = document.createElement("td");
+        this.r3_cell.innerHTML = "0";
+        row.appendChild(this.r3_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "User Register 4";
+        row.appendChild(cell);
+        this.r4_cell = document.createElement("td");
+        this.r4_cell.innerHTML = "0";
+        row.appendChild(this.r4_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "User Register 5";
+        row.appendChild(cell);
+        this.r5_cell = document.createElement("td");
+        this.r5_cell.innerHTML = "0";
+        row.appendChild(this.r5_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "User Register 6";
+        row.appendChild(cell);
+        this.r6_cell = document.createElement("td");
+        this.r6_cell.innerHTML = "0";
+        row.appendChild(this.r6_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "User Register 7";
+        row.appendChild(cell);
+        this.r7_cell = document.createElement("td");
+        this.r7_cell.innerHTML = "0";
+        row.appendChild(this.r7_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Port Register 0";
+        row.appendChild(cell);
+        this.p0_cell = document.createElement("td");
+        this.p0_cell.innerHTML = "0";
+        row.appendChild(this.p0_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Port Register 1";
+        row.appendChild(cell);
+        this.p1_cell = document.createElement("td");
+        this.p1_cell.innerHTML = "0";
+        row.appendChild(this.p1_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Port Register 2";
+        row.appendChild(cell);
+        this.p2_cell = document.createElement("td");
+        this.p2_cell.innerHTML = "0";
+        row.appendChild(this.p2_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Port Register 3";
+        row.appendChild(cell);
+        this.p3_cell = document.createElement("td");
+        this.p3_cell.innerHTML = "0";
+        row.appendChild(this.p3_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Port Register 4";
+        row.appendChild(cell);
+        this.p4_cell = document.createElement("td");
+        this.p4_cell.innerHTML = "0";
+        row.appendChild(this.p4_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Port Register 5";
+        row.appendChild(cell);
+        this.p5_cell = document.createElement("td");
+        this.p5_cell.innerHTML = "0";
+        row.appendChild(this.p5_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Port Register 6";
+        row.appendChild(cell);
+        this.p6_cell = document.createElement("td");
+        this.p6_cell.innerHTML = "0";
+        row.appendChild(this.p6_cell);
+        rega.appendChild(row);
+
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.innerHTML = "Port Register 7";
+        row.appendChild(cell);
+        this.p7_cell = document.createElement("td");
+        this.p7_cell.innerHTML = "0";
+        row.appendChild(this.p7_cell);
         rega.appendChild(row);
 
         cellright.appendChild(lod);
@@ -410,8 +696,8 @@ class W80Casette extends HTMLElement {
             window.alert("No program loaded. Please load a program first from the cardridge menu.");
             return;
         }
-        this.setAttribute("pc", Number(this.getAttribute("pc"))+1);
-        this.ip_cell.innerHTML = this.getAttribute("pc").padStart(5,"0");
+        this.setAttribute("pc", (Number(parseInt(this.getAttribute("pc"),16))+1).toString(16).padStart(3,"0").toUpperCase());
+        this.ip_cell.innerHTML = this.getAttribute("pc");
         var deze = this.grabInstruction(this.getAttribute("pc"));
         if(mark){
             var pickednode = this.shadow.querySelectorAll("w80-opcode.marked");
@@ -420,6 +706,11 @@ class W80Casette extends HTMLElement {
             }
             deze.classList.add("marked");
         }
+        this.ir_cell.innerHTML = deze.getAttribute("opcode").padStart(2,"0");
+        var opcode = parseInt(this.ir_cell.innerHTML,16);
+        this.ir_op_cell.innerHTML = (opcode & 0xF).toString(16).toUpperCase();
+        this.ir_ex_cell.innerHTML = ((opcode & 0x10)>>4).toString(16).toUpperCase();
+        this.ir_rg_cell.innerHTML = ((opcode & 0xE0)>>5).toString(16).toUpperCase();
         return deze;
     }
 

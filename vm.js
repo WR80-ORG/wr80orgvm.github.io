@@ -78,7 +78,7 @@ window.WR80X = {
             var nummer = view[g].toString(16).toUpperCase();
             var typoid = document.createElement("w80-opcode");
             typoid.setAttribute("opcode",nummer);
-            typoid.setAttribute("address",address);
+            typoid.setAttribute("address",address.toString(16).toUpperCase().padStart(3,"0"));
             typoid.style.width="100%";
             typoid.style.display="block";
             lst.push(typoid);
