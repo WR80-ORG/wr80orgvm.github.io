@@ -334,11 +334,14 @@ class W80Casette extends HTMLElement {
         
     }
 
+    newrun = false;
+
     updatescheck(nodes){
+        this.newrun = true;
         this.shadow = this.attachShadow({ mode: "open" });
         this.shadow.innerHTML = "";
         var sty = document.createElement("style");
-        sty.innerHTML = ".marked { background-color: pink;} section { width: 100%; } w80-opcode { width: 100%} table{ width: 100%} fieldset{ overflow-y: scroll; height: 300px;}";
+        sty.innerHTML = ".marked { background-color: pink;} section { width: 100%; } w80-opcode { width: 100%} table{ width: 100%} fieldset{ overflow-y: scroll; height: 300px;} .selectablerow:hover{background-color: lightgray;}";
         this.shadow.appendChild(sty);
 
 
@@ -352,6 +355,14 @@ class W80Casette extends HTMLElement {
         baserow.appendChild(cellright);
         basetable.appendChild(baserow);
 
+        var secondbaserow = document.createElement("tr");
+        var secondcellleft = document.createElement("td");
+        secondcellleft.style.width="70%";
+        secondbaserow.appendChild(secondcellleft);
+        var secondcellright = document.createElement("td");
+        secondbaserow.appendChild(secondcellright);
+        basetable.appendChild(secondbaserow);
+
 
         var lod = document.createElement("fieldset");
         var leg = document.createElement("legend");
@@ -364,8 +375,6 @@ class W80Casette extends HTMLElement {
             th.appendChild(nodes[r]);
             lod.appendChild(th);
         }
-        this.setAttribute("nodecount", nodes.length);
-        this.setAttribute("pc", -1);
 
         var lod = document.createElement("fieldset");
         var leg = document.createElement("legend");
@@ -392,6 +401,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Instruction Register";
         row.appendChild(cell);
@@ -403,6 +413,7 @@ class W80Casette extends HTMLElement {
         var opcode = parseInt(this.ir_cell.innerHTML,16);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "- IR opcode";
         row.appendChild(cell);
@@ -412,6 +423,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "- IR extension";
         row.appendChild(cell);
@@ -421,6 +433,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "- IR registers";
         row.appendChild(cell);
@@ -430,6 +443,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Result Register";
         row.appendChild(cell);
@@ -439,15 +453,17 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Program Counter";
         row.appendChild(cell);
-        this.ip_cell = document.createElement("td");
-        this.ip_cell.innerHTML = "-1";
-        row.appendChild(this.ip_cell);
+        this.pc_cell = document.createElement("td");
+        this.pc_cell.innerHTML = "-1";
+        row.appendChild(this.pc_cell);
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Jump Register";
         row.appendChild(cell);
@@ -457,6 +473,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Stack Transfer High Register";
         row.appendChild(cell);
@@ -466,6 +483,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Stack Transfer Low Register";
         row.appendChild(cell);
@@ -475,6 +493,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Interrupt Special Register";
         row.appendChild(cell);
@@ -484,6 +503,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "P2 Interrupt Data Register";
         row.appendChild(cell);
@@ -500,6 +520,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Stack Pointer";
         row.appendChild(cell);
@@ -509,6 +530,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Base Pointer";
         row.appendChild(cell);
@@ -518,6 +540,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Data Register";
         row.appendChild(cell);
@@ -527,6 +550,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Status Register";
         row.appendChild(cell);
@@ -536,6 +560,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "User Register 0";
         row.appendChild(cell);
@@ -545,6 +570,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "User Register 1";
         row.appendChild(cell);
@@ -554,6 +580,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "User Register 2";
         row.appendChild(cell);
@@ -563,6 +590,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "User Register 3";
         row.appendChild(cell);
@@ -572,6 +600,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "User Register 4";
         row.appendChild(cell);
@@ -581,6 +610,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "User Register 5";
         row.appendChild(cell);
@@ -590,6 +620,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "User Register 6";
         row.appendChild(cell);
@@ -599,6 +630,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "User Register 7";
         row.appendChild(cell);
@@ -608,6 +640,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Port Register 0";
         row.appendChild(cell);
@@ -617,6 +650,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Port Register 1";
         row.appendChild(cell);
@@ -626,6 +660,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Port Register 2";
         row.appendChild(cell);
@@ -635,6 +670,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Port Register 3";
         row.appendChild(cell);
@@ -644,6 +680,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Port Register 4";
         row.appendChild(cell);
@@ -653,6 +690,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Port Register 5";
         row.appendChild(cell);
@@ -662,6 +700,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Port Register 6";
         row.appendChild(cell);
@@ -671,6 +710,7 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         row = document.createElement("tr");
+        row.classList.add("selectablerow");
         cell = document.createElement("td");
         cell.innerHTML = "Port Register 7";
         row.appendChild(cell);
@@ -680,9 +720,190 @@ class W80Casette extends HTMLElement {
         rega.appendChild(row);
 
         cellright.appendChild(lod);
+
+        this.cpu = {
+            ir: 0,
+            rr: 0,
+            pc: 0,
+            jr: 0,
+            sthr: 0,
+            stlr: 0,
+            isr: 0,
+            p2l: 0,
+            sp: 0,
+            bp: 0,
+            dr: 0,
+            sr: 0,
+            r0: 0,
+            r1: 0,
+            r2: 0,
+            r3: 0,
+            r4: 0,
+            r5: 0,
+            r6: 0,
+            r7: 0,
+            p0: 0,
+            p1: 0,
+            p2: 0,
+            p3: 0,
+            p4: 0,
+            p5: 0,
+            p6: 0,
+            p7: 0
+        };
+
+        var ks = Object.keys(this.cpu);
+        var outerthis = this;
+        for(var i = 0 ; i < ks.length ; i++){
+            this.cpu[ks[i]] = {
+                name: ks[i],
+                cell: this[ks[i]+"_cell"],
+                get value(){
+                    console.log("Getting " + this.name + " value " + this.cell.innerHTML);
+                    return parseInt(this.cell.innerHTML,16);
+                },
+                set value(v){
+                    v = v.toString(16).toUpperCase();
+                    console.log("Setting " + this.name + " value to " + v);
+                    if(this.name==="pc"){
+                        v = v.padStart(3,"0");
+                    }else if(this.name==="ir"){
+                        v = v.padStart(2,"0");
+                        var opcode = parseInt(v,16);
+                        outerthis.ir_op_cell.innerHTML = ((opcode & 0xF0)>>4).toString(16).toUpperCase();
+                        outerthis.ir_ex_cell.innerHTML = ((opcode & 0x8)>>3).toString(16).toUpperCase();
+                        outerthis.ir_rg_cell.innerHTML = (opcode & 0x7).toString(16).toUpperCase();
+                        if(v=="00"){
+                            outerthis.cpu.dr.value &= outerthis.cpu.r0.value;
+                        }else if(v=="01"){
+                            outerthis.cpu.dr.value &= outerthis.cpu.r1.value;
+                        }else if(v=="02"){
+                            outerthis.cpu.dr.value &= outerthis.cpu.r2.value;
+                        }else if(v=="03"){
+                            outerthis.cpu.dr.value &= outerthis.cpu.r3.value;
+                        }else if(v=="04"){
+                            outerthis.cpu.dr.value &= outerthis.cpu.r4.value;
+                        }else if(v=="05"){
+                            outerthis.cpu.dr.value &= outerthis.cpu.r5.value;
+                        }else if(v=="06"){
+                            outerthis.cpu.dr.value &= outerthis.cpu.r6.value;
+                        }else if(v=="07"){
+                            outerthis.cpu.dr.value &= outerthis.cpu.r7.value;
+                        }else if(v=="10"){
+                            outerthis.cpu.dr.value |= outerthis.cpu.r0.value;
+                        }else if(v=="11"){
+                            outerthis.cpu.dr.value |= outerthis.cpu.r1.value;
+                        }else if(v=="12"){
+                            outerthis.cpu.dr.value |= outerthis.cpu.r2.value;
+                        }else if(v=="13"){
+                            outerthis.cpu.dr.value |= outerthis.cpu.r3.value;
+                        }else if(v=="14"){
+                            outerthis.cpu.dr.value |= outerthis.cpu.r4.value;
+                        }else if(v=="15"){
+                            outerthis.cpu.dr.value |= outerthis.cpu.r5.value;
+                        }else if(v=="16"){
+                            outerthis.cpu.dr.value |= outerthis.cpu.r6.value;
+                        }else if(v=="17"){
+                            outerthis.cpu.dr.value |= outerthis.cpu.r7.value;
+                        }else if(v=="20"){
+                            outerthis.cpu.dr.value = ~ outerthis.cpu.r0.value;
+                        }else if(v=="21"){
+                            outerthis.cpu.dr.value = ~ outerthis.cpu.r1.value;
+                        }else if(v=="22"){
+                            outerthis.cpu.dr.value = ~ outerthis.cpu.r2.value;
+                        }else if(v=="23"){
+                            outerthis.cpu.dr.value = ~ outerthis.cpu.r3.value;
+                        }else if(v=="24"){
+                            outerthis.cpu.dr.value = ~ outerthis.cpu.r4.value;
+                        }else if(v=="25"){
+                            outerthis.cpu.dr.value = ~ outerthis.cpu.r5.value;
+                        }else if(v=="26"){
+                            outerthis.cpu.dr.value = ~ outerthis.cpu.r6.value;
+                        }else if(v=="27"){
+                            outerthis.cpu.dr.value = ~ outerthis.cpu.r7.value;
+                        }else if(v=="30"){
+                            outerthis.cpu.dr.value ^= outerthis.cpu.r0.value;
+                        }else if(v=="31"){
+                            outerthis.cpu.dr.value ^= outerthis.cpu.r1.value;
+                        }else if(v=="32"){
+                            outerthis.cpu.dr.value ^= outerthis.cpu.r2.value;
+                        }else if(v=="33"){
+                            outerthis.cpu.dr.value ^= outerthis.cpu.r3.value;
+                        }else if(v=="34"){
+                            outerthis.cpu.dr.value ^= outerthis.cpu.r4.value;
+                        }else if(v=="35"){
+                            outerthis.cpu.dr.value ^= outerthis.cpu.r5.value;
+                        }else if(v=="36"){
+                            outerthis.cpu.dr.value ^= outerthis.cpu.r6.value;
+                        }else if(v=="37"){
+                            outerthis.cpu.dr.value ^= outerthis.cpu.r7.value;
+                        }else if(v=="40"){
+                            outerthis.cpu.dr.value += outerthis.cpu.r0.value;
+                        }else if(v=="41"){
+                            outerthis.cpu.dr.value += outerthis.cpu.r1.value;
+                        }else if(v=="42"){
+                            outerthis.cpu.dr.value += outerthis.cpu.r2.value;
+                        }else if(v=="43"){
+                            outerthis.cpu.dr.value += outerthis.cpu.r3.value;
+                        }else if(v=="44"){
+                            outerthis.cpu.dr.value += outerthis.cpu.r4.value;
+                        }else if(v=="45"){
+                            outerthis.cpu.dr.value += outerthis.cpu.r5.value;
+                        }else if(v=="46"){
+                            outerthis.cpu.dr.value += outerthis.cpu.r6.value;
+                        }else if(v=="47"){
+                            outerthis.cpu.dr.value += outerthis.cpu.r7.value;
+                        }else if(v=="50"){
+                            outerthis.cpu.dr.value -= outerthis.cpu.r0.value;
+                        }else if(v=="51"){
+                            outerthis.cpu.dr.value -= outerthis.cpu.r1.value;
+                        }else if(v=="52"){
+                            outerthis.cpu.dr.value -= outerthis.cpu.r2.value;
+                        }else if(v=="53"){
+                            outerthis.cpu.dr.value -= outerthis.cpu.r3.value;
+                        }else if(v=="54"){
+                            outerthis.cpu.dr.value -= outerthis.cpu.r4.value;
+                        }else if(v=="55"){
+                            outerthis.cpu.dr.value -= outerthis.cpu.r5.value;
+                        }else if(v=="56"){
+                            outerthis.cpu.dr.value -= outerthis.cpu.r6.value;
+                        }else if(v=="57"){
+                            outerthis.cpu.dr.value -= outerthis.cpu.r7.value;
+                        }else if(v.charAt(0)=="6"){
+                            outerthis.cpu.dr.value = v.charAt(1);
+                        }else if(v=="70"){
+                            outerthis.cpu.r0.value = outerthis.cpu.dr.value;
+                        }else if(v=="71"){
+                            outerthis.cpu.r1.value = outerthis.cpu.dr.value;
+                        }else if(v=="72"){
+                            outerthis.cpu.r2.value = outerthis.cpu.dr.value;
+                        }else if(v=="73"){
+                            outerthis.cpu.r3.value = outerthis.cpu.dr.value;
+                        }else if(v=="74"){
+                            outerthis.cpu.r4.value = outerthis.cpu.dr.value;
+                        }else if(v=="75"){
+                            outerthis.cpu.r5.value = outerthis.cpu.dr.value;
+                        }else if(v=="76"){
+                            outerthis.cpu.r6.value = outerthis.cpu.dr.value;
+                        }else if(v=="77"){
+                            outerthis.cpu.r7.value = outerthis.cpu.dr.value;
+                        }
+                    }
+                    this.cell.innerHTML = v;
+                }
+            };
+        }
+
+        for(var i = 0 ; i < ks.length ; i++){
+            this.cpu[ks[i]].value = 0;
+        }
+        this.cpu.pc.value = 0;
     }
 
     grabInstruction(where){
+        if(typeof(where)=="number"){
+            where = where.toString(16).toUpperCase().padStart(3,"0");
+        }
         var pickednode = this.shadow.querySelectorAll("w80-opcode[address='"+where+"']");
         if(pickednode.length!=1){
             throw new Error("Cant grab instruction " + where);
@@ -696,9 +917,8 @@ class W80Casette extends HTMLElement {
             window.alert("No program loaded. Please load a program first from the cardridge menu.");
             return;
         }
-        this.setAttribute("pc", (Number(parseInt(this.getAttribute("pc"),16))+1).toString(16).padStart(3,"0").toUpperCase());
-        this.ip_cell.innerHTML = this.getAttribute("pc");
-        var deze = this.grabInstruction(this.getAttribute("pc"));
+        var deze = this.grabInstruction(this.newrun?this.cpu.pc.value:++this.cpu.pc.value);
+        this.newrun = false;
         if(mark){
             var pickednode = this.shadow.querySelectorAll("w80-opcode.marked");
             for(var i = 0 ; i < pickednode.length ; i++){
@@ -706,16 +926,9 @@ class W80Casette extends HTMLElement {
             }
             deze.classList.add("marked");
         }
-        this.ir_cell.innerHTML = deze.getAttribute("opcode").padStart(2,"0");
-        var opcode = parseInt(this.ir_cell.innerHTML,16);
-        this.ir_op_cell.innerHTML = (opcode & 0xF).toString(16).toUpperCase();
-        this.ir_ex_cell.innerHTML = ((opcode & 0x10)>>4).toString(16).toUpperCase();
-        this.ir_rg_cell.innerHTML = ((opcode & 0xE0)>>5).toString(16).toUpperCase();
+        this.cpu.ir.value = parseInt(deze.getAttribute("opcode"),16);
+        
         return deze;
-    }
-
-    attributeChangedCallback(name, oldValue, newValue) {
-        console.log(`Attribute ${name} has changed.`);
     }
 }
 
