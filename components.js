@@ -45,6 +45,9 @@ class W80Opcode extends HTMLElement {
     // console.log("Custom element moved to new page.");
   }
 
+  exec(cpu){
+  }
+
   attributeChangedCallback(name, oldValue, newValue) {
     // console.log(`Attribute ${name} has changed.`);
     if(name==="address"){
@@ -57,6 +60,10 @@ class W80Opcode extends HTMLElement {
         var scri = "";
         this.opcode_container.style.color = "purple";
         switch(newValue){
+            case "00":
+                scri = "AND";
+                this.arg_container.innerHTML = "R0";
+                break;
             case "01":
                 scri = "AND";
                 this.arg_container.innerHTML = "R1";
@@ -85,8 +92,33 @@ class W80Opcode extends HTMLElement {
                 scri = "AND";
                 this.arg_container.innerHTML = "R7";
                 break;
+            case "08":
+                scri = "EI";
+                break;
+            case "09":
+                scri = "DI";
+                break;
+            case "0A":
+                scri = "ED";
+                break;
+            case "0B":
+                scri = "DD";
+                break;
+            case "0C":
+                scri = "EC";
+                break;
+            case "0D":
+                scri = "DC";
+                break;
             case "0E":
                 scri = "CDR";
+                break;
+            case "0F":
+                scri = "CLR";
+                break;
+            case "10":
+                scri = "OR";
+                this.arg_container.innerHTML = "R0";
                 break;
             case "11":
                 scri = "OR";
@@ -125,8 +157,24 @@ class W80Opcode extends HTMLElement {
             case "1A":
                 scri = "PUSHS";
                 break;
+            case "1B":
+                scri = "POPS";
+                break;
+            case "1C":
+                scri = "SBP";
+                break;
             case "1D":
                 scri = "ABP";
+                break;
+            case "1E":
+                scri = "SSP";
+                break;
+            case "1F":
+                scri = "IRET";
+                break;
+            case "20":
+                scri = "NOT";
+                this.arg_container.innerHTML = "R0";
                 break;
             case "21":
                 scri = "NOT";
@@ -159,11 +207,18 @@ class W80Opcode extends HTMLElement {
             case "28":
                 scri = "PUSHD";
                 break;
+            case "29":
+                scri = "POPD";
+                break;
             case "2A":
                 scri = "SBW";
                 break;
             case "2F":
                 scri = "RET";
+                break;
+            case "30":
+                scri = "XOR";
+                this.arg_container.innerHTML = "R0";
                 break;
             case "31":
                 scri = "XOR";
@@ -191,6 +246,38 @@ class W80Opcode extends HTMLElement {
                 break;
             case "37":
                 scri = "XOR";
+                this.arg_container.innerHTML = "R7";
+                break;
+            case "38":
+                scri = "PUSH";
+                this.arg_container.innerHTML = "R0";
+                break;
+            case "39":
+                scri = "PUSH";
+                this.arg_container.innerHTML = "R1";
+                break;
+            case "3A":
+                scri = "PUSH";
+                this.arg_container.innerHTML = "R2";
+                break;
+            case "3B":
+                scri = "PUSH";
+                this.arg_container.innerHTML = "R3";
+                break;
+            case "3C":
+                scri = "PUSH";
+                this.arg_container.innerHTML = "R4";
+                break;
+            case "3D":
+                scri = "PUSH";
+                this.arg_container.innerHTML = "R5";
+                break;
+            case "3E":
+                scri = "PUSH";
+                this.arg_container.innerHTML = "R6";
+                break;
+            case "3F":
+                scri = "PUSH";
                 this.arg_container.innerHTML = "R7";
                 break;
             case "40":
@@ -229,6 +316,38 @@ class W80Opcode extends HTMLElement {
                 scri = "POP";
                 this.arg_container.innerHTML = "R0";
                 break;
+            case "49":
+                scri = "POP";
+                this.arg_container.innerHTML = "R1";
+                break;
+            case "4A":
+                scri = "POP";
+                this.arg_container.innerHTML = "R2";
+                break;
+            case "4B":
+                scri = "POP";
+                this.arg_container.innerHTML = "R3";
+                break;
+            case "4C":
+                scri = "POP";
+                this.arg_container.innerHTML = "R4";
+                break;
+            case "4D":
+                scri = "POP";
+                this.arg_container.innerHTML = "R5";
+                break;
+            case "4E":
+                scri = "POP";
+                this.arg_container.innerHTML = "R6";
+                break;
+            case "4F":
+                scri = "POP";
+                this.arg_container.innerHTML = "R7";
+                break;
+            case "50":
+                scri = "SUB";
+                this.arg_container.innerHTML = "R0";
+                break;
             case "51":
                 scri = "SUB";
                 this.arg_container.innerHTML = "R1";
@@ -256,6 +375,74 @@ class W80Opcode extends HTMLElement {
             case "57":
                 scri = "SUB";
                 this.arg_container.innerHTML = "R7";
+                break;
+            case "70":
+                scri = "LD";
+                this.arg_container.innerHTML = "R0";
+                break;
+            case "71":
+                scri = "LD";
+                this.arg_container.innerHTML = "R1";
+                break;
+            case "72":
+                scri = "LD";
+                this.arg_container.innerHTML = "R2";
+                break;
+            case "73":
+                scri = "LD";
+                this.arg_container.innerHTML = "R3";
+                break;
+            case "74":
+                scri = "LD";
+                this.arg_container.innerHTML = "R4";
+                break;
+            case "75":
+                scri = "LD";
+                this.arg_container.innerHTML = "R5";
+                break;
+            case "76":
+                scri = "LD";
+                this.arg_container.innerHTML = "R6";
+                break;
+            case "77":
+                scri = "LD";
+                this.arg_container.innerHTML = "R7";
+                break;
+            case "80":
+                scri = "IN";
+                this.arg_container.innerHTML = "R0";
+                break;
+            case "81":
+                scri = "IN";
+                this.arg_container.innerHTML = "R1";
+                break;
+            case "82":
+                scri = "IN";
+                this.arg_container.innerHTML = "R2";
+                break;
+            case "83":
+                scri = "IN";
+                this.arg_container.innerHTML = "R3";
+                break;
+            case "84":
+                scri = "IN";
+                this.arg_container.innerHTML = "R4";
+                break;
+            case "85":
+                scri = "IN";
+                this.arg_container.innerHTML = "R5";
+                break;
+            case "86":
+                scri = "IN";
+                this.arg_container.innerHTML = "R6";
+                break;
+            case "87":
+                scri = "IN";
+                this.arg_container.innerHTML = "R7";
+                break;
+            case "88":
+                scri = "MUL";
+                this.arg_container.innerHTML = "R0";
                 break;
             case "89":
                 scri = "MUL";
@@ -285,6 +472,42 @@ class W80Opcode extends HTMLElement {
                 scri = "MUL";
                 this.arg_container.innerHTML = "R7";
                 break;
+            case "90":
+                scri = "OUT";
+                this.arg_container.innerHTML = "R0";
+                break;
+            case "91":
+                scri = "OUT";
+                this.arg_container.innerHTML = "R1";
+                break;
+            case "92":
+                scri = "OUT";
+                this.arg_container.innerHTML = "R2";
+                break;
+            case "93":
+                scri = "OUT";
+                this.arg_container.innerHTML = "R3";
+                break;
+            case "94":
+                scri = "OUT";
+                this.arg_container.innerHTML = "R4";
+                break;
+            case "95":
+                scri = "OUT";
+                this.arg_container.innerHTML = "R5";
+                break;
+            case "96":
+                scri = "OUT";
+                this.arg_container.innerHTML = "R6";
+                break;
+            case "97":
+                scri = "OUT";
+                this.arg_container.innerHTML = "R7";
+                break;
+            case "98":
+                scri = "DIV";
+                this.arg_container.innerHTML = "R0";
+                break;
             case "99":
                 scri = "DIV";
                 this.arg_container.innerHTML = "R1";
@@ -311,6 +534,70 @@ class W80Opcode extends HTMLElement {
                 break;
             case "9F":
                 scri = "DIV";
+                this.arg_container.innerHTML = "R7";
+                break;
+            case "A8":
+                scri = "STL";
+                this.arg_container.innerHTML = "R0";
+                break;
+            case "A9":
+                scri = "STL";
+                this.arg_container.innerHTML = "R1";
+                break;
+            case "AA":
+                scri = "STL";
+                this.arg_container.innerHTML = "R2";
+                break;
+            case "AB":
+                scri = "STL";
+                this.arg_container.innerHTML = "R3";
+                break;
+            case "AC":
+                scri = "STL";
+                this.arg_container.innerHTML = "R4";
+                break;
+            case "AD":
+                scri = "STL";
+                this.arg_container.innerHTML = "R5";
+                break;
+            case "AE":
+                scri = "STL";
+                this.arg_container.innerHTML = "R6";
+                break;
+            case "AF":
+                scri = "STL";
+                this.arg_container.innerHTML = "R7";
+                break;
+            case "C0":
+                scri = "BT";
+                this.arg_container.innerHTML = "R0";
+                break;
+            case "C1":
+                scri = "BT";
+                this.arg_container.innerHTML = "R1";
+                break;
+            case "C2":
+                scri = "BT";
+                this.arg_container.innerHTML = "R2";
+                break;
+            case "C3":
+                scri = "BT";
+                this.arg_container.innerHTML = "R3";
+                break;
+            case "C4":
+                scri = "BT";
+                this.arg_container.innerHTML = "R4";
+                break;
+            case "C5":
+                scri = "BT";
+                this.arg_container.innerHTML = "R5";
+                break;
+            case "C6":
+                scri = "BT";
+                this.arg_container.innerHTML = "R6";
+                break;
+            case "C7":
+                scri = "BT";
                 this.arg_container.innerHTML = "R7";
                 break;
             default:
@@ -773,121 +1060,6 @@ class W80Casette extends HTMLElement {
                         outerthis.ir_op_cell.innerHTML = ((opcode & 0xF0)>>4).toString(16).toUpperCase();
                         outerthis.ir_ex_cell.innerHTML = ((opcode & 0x8)>>3).toString(16).toUpperCase();
                         outerthis.ir_rg_cell.innerHTML = (opcode & 0x7).toString(16).toUpperCase();
-                        if(v=="00"){
-                            outerthis.cpu.dr.value &= outerthis.cpu.r0.value;
-                        }else if(v=="01"){
-                            outerthis.cpu.dr.value &= outerthis.cpu.r1.value;
-                        }else if(v=="02"){
-                            outerthis.cpu.dr.value &= outerthis.cpu.r2.value;
-                        }else if(v=="03"){
-                            outerthis.cpu.dr.value &= outerthis.cpu.r3.value;
-                        }else if(v=="04"){
-                            outerthis.cpu.dr.value &= outerthis.cpu.r4.value;
-                        }else if(v=="05"){
-                            outerthis.cpu.dr.value &= outerthis.cpu.r5.value;
-                        }else if(v=="06"){
-                            outerthis.cpu.dr.value &= outerthis.cpu.r6.value;
-                        }else if(v=="07"){
-                            outerthis.cpu.dr.value &= outerthis.cpu.r7.value;
-                        }else if(v=="10"){
-                            outerthis.cpu.dr.value |= outerthis.cpu.r0.value;
-                        }else if(v=="11"){
-                            outerthis.cpu.dr.value |= outerthis.cpu.r1.value;
-                        }else if(v=="12"){
-                            outerthis.cpu.dr.value |= outerthis.cpu.r2.value;
-                        }else if(v=="13"){
-                            outerthis.cpu.dr.value |= outerthis.cpu.r3.value;
-                        }else if(v=="14"){
-                            outerthis.cpu.dr.value |= outerthis.cpu.r4.value;
-                        }else if(v=="15"){
-                            outerthis.cpu.dr.value |= outerthis.cpu.r5.value;
-                        }else if(v=="16"){
-                            outerthis.cpu.dr.value |= outerthis.cpu.r6.value;
-                        }else if(v=="17"){
-                            outerthis.cpu.dr.value |= outerthis.cpu.r7.value;
-                        }else if(v=="20"){
-                            outerthis.cpu.dr.value = ~ outerthis.cpu.r0.value;
-                        }else if(v=="21"){
-                            outerthis.cpu.dr.value = ~ outerthis.cpu.r1.value;
-                        }else if(v=="22"){
-                            outerthis.cpu.dr.value = ~ outerthis.cpu.r2.value;
-                        }else if(v=="23"){
-                            outerthis.cpu.dr.value = ~ outerthis.cpu.r3.value;
-                        }else if(v=="24"){
-                            outerthis.cpu.dr.value = ~ outerthis.cpu.r4.value;
-                        }else if(v=="25"){
-                            outerthis.cpu.dr.value = ~ outerthis.cpu.r5.value;
-                        }else if(v=="26"){
-                            outerthis.cpu.dr.value = ~ outerthis.cpu.r6.value;
-                        }else if(v=="27"){
-                            outerthis.cpu.dr.value = ~ outerthis.cpu.r7.value;
-                        }else if(v=="30"){
-                            outerthis.cpu.dr.value ^= outerthis.cpu.r0.value;
-                        }else if(v=="31"){
-                            outerthis.cpu.dr.value ^= outerthis.cpu.r1.value;
-                        }else if(v=="32"){
-                            outerthis.cpu.dr.value ^= outerthis.cpu.r2.value;
-                        }else if(v=="33"){
-                            outerthis.cpu.dr.value ^= outerthis.cpu.r3.value;
-                        }else if(v=="34"){
-                            outerthis.cpu.dr.value ^= outerthis.cpu.r4.value;
-                        }else if(v=="35"){
-                            outerthis.cpu.dr.value ^= outerthis.cpu.r5.value;
-                        }else if(v=="36"){
-                            outerthis.cpu.dr.value ^= outerthis.cpu.r6.value;
-                        }else if(v=="37"){
-                            outerthis.cpu.dr.value ^= outerthis.cpu.r7.value;
-                        }else if(v=="40"){
-                            outerthis.cpu.dr.value += outerthis.cpu.r0.value;
-                        }else if(v=="41"){
-                            outerthis.cpu.dr.value += outerthis.cpu.r1.value;
-                        }else if(v=="42"){
-                            outerthis.cpu.dr.value += outerthis.cpu.r2.value;
-                        }else if(v=="43"){
-                            outerthis.cpu.dr.value += outerthis.cpu.r3.value;
-                        }else if(v=="44"){
-                            outerthis.cpu.dr.value += outerthis.cpu.r4.value;
-                        }else if(v=="45"){
-                            outerthis.cpu.dr.value += outerthis.cpu.r5.value;
-                        }else if(v=="46"){
-                            outerthis.cpu.dr.value += outerthis.cpu.r6.value;
-                        }else if(v=="47"){
-                            outerthis.cpu.dr.value += outerthis.cpu.r7.value;
-                        }else if(v=="50"){
-                            outerthis.cpu.dr.value -= outerthis.cpu.r0.value;
-                        }else if(v=="51"){
-                            outerthis.cpu.dr.value -= outerthis.cpu.r1.value;
-                        }else if(v=="52"){
-                            outerthis.cpu.dr.value -= outerthis.cpu.r2.value;
-                        }else if(v=="53"){
-                            outerthis.cpu.dr.value -= outerthis.cpu.r3.value;
-                        }else if(v=="54"){
-                            outerthis.cpu.dr.value -= outerthis.cpu.r4.value;
-                        }else if(v=="55"){
-                            outerthis.cpu.dr.value -= outerthis.cpu.r5.value;
-                        }else if(v=="56"){
-                            outerthis.cpu.dr.value -= outerthis.cpu.r6.value;
-                        }else if(v=="57"){
-                            outerthis.cpu.dr.value -= outerthis.cpu.r7.value;
-                        }else if(v.charAt(0)=="6"){
-                            outerthis.cpu.dr.value = v.charAt(1);
-                        }else if(v=="70"){
-                            outerthis.cpu.r0.value = outerthis.cpu.dr.value;
-                        }else if(v=="71"){
-                            outerthis.cpu.r1.value = outerthis.cpu.dr.value;
-                        }else if(v=="72"){
-                            outerthis.cpu.r2.value = outerthis.cpu.dr.value;
-                        }else if(v=="73"){
-                            outerthis.cpu.r3.value = outerthis.cpu.dr.value;
-                        }else if(v=="74"){
-                            outerthis.cpu.r4.value = outerthis.cpu.dr.value;
-                        }else if(v=="75"){
-                            outerthis.cpu.r5.value = outerthis.cpu.dr.value;
-                        }else if(v=="76"){
-                            outerthis.cpu.r6.value = outerthis.cpu.dr.value;
-                        }else if(v=="77"){
-                            outerthis.cpu.r7.value = outerthis.cpu.dr.value;
-                        }
                     }
                     this.cell.innerHTML = v;
                 }
@@ -927,6 +1099,7 @@ class W80Casette extends HTMLElement {
             deze.classList.add("marked");
         }
         this.cpu.ir.value = parseInt(deze.getAttribute("opcode"),16);
+        deze.exec(this.cpu);
         
         return deze;
     }
