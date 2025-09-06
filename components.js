@@ -2,6 +2,8 @@
 class W80Opcode extends HTMLElement {
   static observedAttributes = ["address", "opcode", "arg1"];
 
+  requiresExtraArgument = false;
+
   constructor() {
     // Always call super first in constructor
     super();
@@ -16,6 +18,9 @@ class W80Opcode extends HTMLElement {
     this.opcode_container.style.color = "purple";
     this.opcode_container.style.fontWeight = "bold";
     this.opcode_container.style.marginLeft = "10px";
+    this.opcode_container.style.display = "inline-block";
+    this.opcode_container.style.minWidth = "30px";
+    this.opcode_container.style.textAlign = "right";
     shadow.appendChild(this.opcode_container);
 
     this.arg_container = document.createElement("b");
@@ -601,8 +606,34 @@ class W80Opcode extends HTMLElement {
                 this.arg_container.innerHTML = "R7";
                 break;
             default:
-                if(newValue.startsWith("6")){
+                if(newValue.startsWith("5")){
+                    scri = "CALL";
+                    this.requiresExtraArgument = true;
+                    this.arg_container.innerHTML = newValue.charAt(1);
+                }else if(newValue.startsWith("6")){
                     scri = "ST";
+                    this.arg_container.innerHTML = newValue.charAt(1);
+                }else if(newValue.startsWith("7")){
+                    scri = "CALL";
+                    this.requiresExtraArgument = true;
+                    this.arg_container.innerHTML = newValue.charAt(1);
+                }else if(newValue.startsWith("A")){
+                    scri = "SHR";
+                    this.arg_container.innerHTML = newValue.charAt(1);
+                }else if(newValue.startsWith("B")){
+                    scri = "SHL";
+                    this.arg_container.innerHTML = newValue.charAt(1);
+                }else if(newValue.startsWith("D")){
+                    scri = "JC";
+                    this.requiresExtraArgument = true;
+                    this.arg_container.innerHTML = newValue.charAt(1);
+                }else if(newValue.startsWith("E")){
+                    scri = "JZ";
+                    this.requiresExtraArgument = true;
+                    this.arg_container.innerHTML = newValue.charAt(1);
+                }else if(newValue.startsWith("F")){
+                    scri = "JP";
+                    this.requiresExtraArgument = true;
                     this.arg_container.innerHTML = newValue.charAt(1);
                 }else{
                     scri = newValue;
@@ -610,6 +641,8 @@ class W80Opcode extends HTMLElement {
                 }
         }
         this.opcode_container.innerHTML = scri;
+    }else if(name=="arg1"){
+        this.arg_container.innerHTML += newValue;
     }
   }
 }
@@ -633,6 +666,7 @@ class W80Casette extends HTMLElement {
 
 
         var basetable = document.createElement("table");
+        basetable.style.cursor = "default";
         this.shadow.appendChild(basetable);
         var baserow = document.createElement("tr");
         var cellleft = document.createElement("td");

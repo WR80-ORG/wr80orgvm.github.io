@@ -83,6 +83,12 @@ window.WR80X = {
             typoid.style.display="block";
             lst.push(typoid);
             address++;
+            if(typoid.requiresExtraArgument){
+                g++;
+                nummer = view[g].toString(16).toUpperCase();
+                typoid.setAttribute("arg1",nummer);
+                address++;
+            }
         }
         store.updatescheck(lst);
     }
