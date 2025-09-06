@@ -30,7 +30,7 @@ class W80Opcode extends HTMLElement {
     shadow.appendChild(this.arg_container);
 
     var sty = document.createElement("style");
-    sty.innerHTML = ":host(:hover){background-color:lightgray;} :host{padding:3px;font-family: monospace;}";
+    sty.innerHTML = ":host(:hover){background-color: var(--w80-hover-color);} :host{padding:3px;font-family: monospace;}";
     shadow.appendChild(sty);
   }
 
@@ -415,35 +415,35 @@ class W80Opcode extends HTMLElement {
                 break;
             case "80":
                 scri = "IN";
-                this.arg_container.innerHTML = "R0";
+                this.arg_container.innerHTML = "P0";
                 break;
             case "81":
                 scri = "IN";
-                this.arg_container.innerHTML = "R1";
+                this.arg_container.innerHTML = "P1";
                 break;
             case "82":
                 scri = "IN";
-                this.arg_container.innerHTML = "R2";
+                this.arg_container.innerHTML = "P2";
                 break;
             case "83":
                 scri = "IN";
-                this.arg_container.innerHTML = "R3";
+                this.arg_container.innerHTML = "P3";
                 break;
             case "84":
                 scri = "IN";
-                this.arg_container.innerHTML = "R4";
+                this.arg_container.innerHTML = "P4";
                 break;
             case "85":
                 scri = "IN";
-                this.arg_container.innerHTML = "R5";
+                this.arg_container.innerHTML = "P5";
                 break;
             case "86":
                 scri = "IN";
-                this.arg_container.innerHTML = "R6";
+                this.arg_container.innerHTML = "P6";
                 break;
             case "87":
                 scri = "IN";
-                this.arg_container.innerHTML = "R7";
+                this.arg_container.innerHTML = "P7";
                 break;
             case "88":
                 scri = "MUL";
@@ -479,35 +479,35 @@ class W80Opcode extends HTMLElement {
                 break;
             case "90":
                 scri = "OUT";
-                this.arg_container.innerHTML = "R0";
+                this.arg_container.innerHTML = "P0";
                 break;
             case "91":
                 scri = "OUT";
-                this.arg_container.innerHTML = "R1";
+                this.arg_container.innerHTML = "P1";
                 break;
             case "92":
                 scri = "OUT";
-                this.arg_container.innerHTML = "R2";
+                this.arg_container.innerHTML = "P2";
                 break;
             case "93":
                 scri = "OUT";
-                this.arg_container.innerHTML = "R3";
+                this.arg_container.innerHTML = "P3";
                 break;
             case "94":
                 scri = "OUT";
-                this.arg_container.innerHTML = "R4";
+                this.arg_container.innerHTML = "P4";
                 break;
             case "95":
                 scri = "OUT";
-                this.arg_container.innerHTML = "R5";
+                this.arg_container.innerHTML = "P5";
                 break;
             case "96":
                 scri = "OUT";
-                this.arg_container.innerHTML = "R6";
+                this.arg_container.innerHTML = "P6";
                 break;
             case "97":
                 scri = "OUT";
-                this.arg_container.innerHTML = "R7";
+                this.arg_container.innerHTML = "P7";
                 break;
             case "98":
                 scri = "DIV";
@@ -661,7 +661,7 @@ class W80Casette extends HTMLElement {
         this.shadow = this.attachShadow({ mode: "open" });
         this.shadow.innerHTML = "";
         var sty = document.createElement("style");
-        sty.innerHTML = ".marked { background-color: pink;} section { width: 100%; } w80-opcode { width: 100%} table{ width: 100%} fieldset{ overflow-y: scroll; height: 300px;} .selectablerow:hover{background-color: lightgray;}";
+        sty.innerHTML = ".marked { background-color: pink;} section { width: 100%; } w80-opcode { width: 100%} table{ width: 100%} fieldset{ overflow-y: scroll; height: 300px;} .selectablerow:hover{background-color: var(--w80-hover-color);}";
         this.shadow.appendChild(sty);
 
 
