@@ -50,7 +50,24 @@ class W80Opcode extends HTMLElement {
     // console.log("Custom element moved to new page.");
   }
 
+  getOpcode(){
+    return this.opcode_container.innerHTML;
+  }
+
+  getArgument(){
+    return this.arg_container.innerHTML;
+  }
+
   exec(cpu){
+    var opcode = this.getOpcode();
+    var arg = this.getArgument();
+    if(opcode=="ST"){
+        cpu.dr.value = ( Number(cpu.dr.value) & 0xF0 ) + Number(arg);
+    }else if(opcode=="SHL"){
+        cpu.dr.value <<= arg;
+    }else{
+        throw new Error("Unsupported opcode "+opcode);
+    }
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -1152,7 +1169,7 @@ class W80Button extends HTMLElement {
         styleurl.setAttribute("href","https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
         shadow.appendChild(styleurl);
         const style = document.createElement("style");
-        style.innerHTML = ".buttonicon { font-size: 50px; } \nbutton{width: 100px;height: 100px;font-size: 20px;border: solid lightblue 1px;background: linear-gradient(aliceblue,lightblue,aliceblue);}\\nbutton:hover{background: linear-gradient(lightblue,aliceblue,lightblue);border: solid blue 1px;cursor: pointer;}";
+        style.innerHTML = ".buttonicon { font-size: 50px; } \nbutton{width: 100px;height: 100px;font-size: 20px;border: solid lightblue 1px;background: linear-gradient(aliceblue,lightblue,aliceblue);}\nbutton:hover{background: linear-gradient(lightblue,aliceblue,lightblue);border: solid blue 1px;cursor: pointer;}";
         shadow.appendChild(style);
         this.base_button = document.createElement("button");
         this.icontag = document.createElement("i");
